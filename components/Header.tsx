@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
-import { nav } from "@/config/site";
+import { CLINIC_NAME, nav } from "@/config/site";
 import { CloseIcon, MenuIcon } from "./icons";
 import { Logo } from "./Logo";
 
@@ -38,7 +38,7 @@ export function Header() {
   return (
     <header className="header">
       <div className="container header__inner">
-        <Link href="/" className="header__logo" aria-label="Acasă">
+        <Link href="/" className="header__logo" aria-label={`${CLINIC_NAME}, pagina principală`}>
           <Logo />
         </Link>
         <button
