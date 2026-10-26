@@ -2041,3 +2041,44 @@ a.contact-card:hover {
   box-shadow: var(--shadow-lg);
   margin-bottom: 12px;
 }
+
+/* ==========================================================================
+   Text lung (confidențialitate)
+   ========================================================================== */
+
+.prose {
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+}
+@media (min-width: 700px) {
+  .prose {
+    padding: 40px 48px;
+  }
+}
+.prose h2 {
+  font-size: 1.45rem;
+  margin-top: 1.6em;
+}
+.prose h2:first-of-type {
+  margin-top: 0.6em;
+}
+.prose li {
+  margin-bottom: 4px;
+}
+.privacy-art {
+  display: grid;
+  place-items: center;
+  width: 70%;
+  aspect-ratio: 1;
+  border: var(--border);
+  border-radius: 40%;
+  background: var(--teal-mist);
+  box-shadow: var(--shadow-lg);
+  color: var(--teal-ink);
+}
+.privacy-art svg {
+  width: 50%;
+  height: 50%;
+}
