@@ -1020,3 +1020,59 @@ main:focus {
   width: 36px;
   height: 36px;
 }
+
+/* ==========================================================================
+   Echipa
+   ========================================================================== */
+
+.member {
+  height: 100%;
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 24px;
+  text-align: center;
+}
+.member p {
+  color: var(--ink-soft);
+}
+.member__avatar {
+  width: 128px;
+  height: 128px;
+  margin: 0 auto 12px;
+  display: block;
+  transition: transform 0.3s var(--ease-bounce);
+}
+.member:hover .member__avatar {
+  transform: rotate(-4deg) scale(1.04);
+}
+.member__name {
+  font-size: 1.35rem;
+  margin-bottom: 0.15em;
+}
+.member .member__role {
+  color: var(--teal-ink);
+  font-weight: 800;
+  margin-bottom: 0.6em;
+}
+.member .member__focus {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 999px;
+  background: var(--sun-soft);
+  color: var(--ink);
+  font-size: 0.95rem;
+}
+.member__focus span {
+  font-weight: 800;
+}
+.member .member__fun {
+  margin: 0;
+  padding-top: 12px;
+  border-top: 2px dashed rgb(32 48 58 / 0.18);
+  font-size: 0.95rem;
+}
+.member__fun strong {
+  color: var(--coral-ink);
+}
