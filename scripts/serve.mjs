@@ -53,7 +53,8 @@ createServer(async (req, res) => {
     const accept = String(req.headers["accept-encoding"] ?? "");
     const enc = accept.includes("br") ? "br" : accept.includes("gzip") ? "gzip" : "";
     if (enc) {
-      const key = `${enc}:${file}`;
+      // Cheia include data modificării, ca un build nou să nu servească fișiere vechi.
+      const key = `${enc}:${file}:${(await stat(file)).mtimeMs}`;
       if (!cache.has(key)) {
         cache.set(
           key,
