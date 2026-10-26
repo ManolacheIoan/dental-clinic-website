@@ -403,7 +403,7 @@ main:focus {
 /* ---------- Subsol ---------- */
 
 .footer {
-  margin-top: 64px;
+  margin-top: 24px;
   color: var(--ink);
 }
 .footer__wave {
@@ -418,7 +418,8 @@ main:focus {
 }
 .footer__grid {
   display: grid;
-  gap: 28px;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px 40px;
 }
 @media (min-width: 768px) {
   .footer__grid {
@@ -426,9 +427,9 @@ main:focus {
   }
 }
 .footer__about {
-  margin-top: 12px;
+  margin: 12px 0 0;
   color: var(--ink-soft);
-  max-width: 34ch;
+  max-width: 60ch;
 }
 .footer__title {
   font-size: 1.15rem;
@@ -474,11 +475,11 @@ main:focus {
 /* ---------- Secțiuni comune ---------- */
 
 .section {
-  padding-block: 56px;
+  padding-block: 36px;
 }
 @media (min-width: 900px) {
   .section {
-    padding-block: 80px;
+    padding-block: 52px;
   }
 }
 .section--teal {
@@ -506,7 +507,7 @@ main:focus {
 
 .section__head {
   max-width: 680px;
-  margin-bottom: 32px;
+  margin-bottom: 24px;
 }
 .section__head--center {
   margin-inline: auto;
@@ -548,7 +549,7 @@ main:focus {
 
 /* Antet de pagină interioară */
 .page-hero {
-  padding: 40px 0 32px;
+  padding: 24px 0 24px;
   overflow: hidden;
 }
 .page-hero__inner {
@@ -558,7 +559,7 @@ main:focus {
 }
 @media (min-width: 800px) {
   .page-hero {
-    padding: 64px 0 48px;
+    padding: 40px 0 32px;
   }
   .page-hero__inner {
     grid-template-columns: 1.4fr 1fr;
@@ -1085,7 +1086,7 @@ main:focus {
    ========================================================================== */
 
 .hero {
-  padding: 28px 0 48px;
+  padding: 20px 0 32px;
   overflow: hidden;
 }
 .hero__inner {
@@ -1095,7 +1096,7 @@ main:focus {
 }
 @media (min-width: 900px) {
   .hero {
-    padding: 56px 0 80px;
+    padding: 36px 0 48px;
   }
   .hero__inner {
     grid-template-columns: 1.1fr 1fr;
