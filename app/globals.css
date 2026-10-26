@@ -1607,3 +1607,47 @@ main:focus {
   width: 72px;
   height: 80px;
 }
+
+/* ==========================================================================
+   Prețuri
+   ========================================================================== */
+
+.price-nav {
+  margin-bottom: 36px;
+}
+.price-groups {
+  display: grid;
+  gap: 28px;
+}
+@media (min-width: 900px) {
+  .price-groups {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 36px;
+  }
+}
+.price-group__head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  scroll-margin-top: 96px;
+}
+.price-group__head:focus {
+  outline: none;
+}
+.price-group__head h2 {
+  font-size: 1.6rem;
+  margin: 0;
+}
+.price-group__art {
+  width: 56px;
+  height: 56px;
+  flex: none;
+}
+.note-box {
+  margin-top: 40px;
+  padding: 24px 24px 10px;
+  background: var(--white);
+  border: 2.5px dashed var(--ink);
+  border-radius: var(--radius);
+}
