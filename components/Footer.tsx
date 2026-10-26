@@ -59,9 +59,6 @@ export function Footer() {
               <li>
                 <Link href="/programare/">Programare</Link>
               </li>
-              <li>
-                <Link href="/confidentialitate/">Confidențialitate și cookie-uri</Link>
-              </li>
             </ul>
           </nav>
         </div>
@@ -69,6 +66,7 @@ export function Footer() {
           <p>
             © {new Date().getFullYear()} {CLINIC_NAME}. Toate drepturile rezervate.
           </p>
+          <Link href="/confidentialitate/">Confidențialitate și cookie-uri</Link>
         </div>
       </div>
     </footer>
