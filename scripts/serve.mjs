@@ -2,6 +2,7 @@
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
+import { brotliCompressSync, gzipSync } from "node:zlib";
 
 const root = join(process.cwd(), "out");
 const port = Number(process.env.PORT ?? 4173);
@@ -41,6 +42,21 @@ createServer(async (req, res) => {
     res.end(await readFile(join(root, "404.html")));
     return;
   }
-  res.writeHead(200, { "content-type": types[extname(file)] ?? "application/octet-stream" });
-  res.end(await readFile(file));
+  const type = types[extname(file)] ?? "application/octet-stream";
+  let body = await readFile(file);
+  const headers = { "content-type": type };
+  // Comprimare, ca la o găzduire reală (Netlify, Vercel etc.).
+  if (/text|javascript|svg|json/.test(type)) {
+    const accept = String(req.headers["accept-encoding"] ?? "");
+    if (accept.includes("br")) {
+      body = brotliCompressSync(body);
+      headers["content-encoding"] = "br";
+    } else if (accept.includes("gzip")) {
+      body = gzipSync(body);
+      headers["content-encoding"] = "gzip";
+    }
+  }
+  if (file.includes("/_next/static/")) headers["cache-control"] = "public, max-age=31536000, immutable";
+  res.writeHead(200, headers);
+  res.end(body);
 }).listen(port, () => console.log(`http://localhost:${port}`));
