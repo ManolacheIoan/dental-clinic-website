@@ -1950,3 +1950,94 @@ textarea {
 .booking-aside li {
   margin-bottom: 4px;
 }
+
+/* ==========================================================================
+   Contact
+   ========================================================================== */
+
+.contact {
+  display: grid;
+  gap: 28px;
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .contact {
+    grid-template-columns: 1fr 1.2fr;
+    gap: 40px;
+  }
+}
+.contact__cards {
+  display: grid;
+  gap: 14px;
+}
+.contact-card {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  padding: 18px 20px;
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--ink);
+  text-decoration: none;
+}
+.contact-card > svg {
+  flex: none;
+  width: 28px;
+  height: 28px;
+  color: var(--teal-ink);
+}
+a.contact-card {
+  box-shadow: 3px 4px 0 var(--ink);
+  transition: transform 0.2s var(--ease-bounce);
+}
+a.contact-card:hover {
+  color: var(--ink);
+  transform: translate(-1px, -3px);
+}
+.contact-card--call {
+  background: var(--sun);
+}
+.contact-card--call > svg {
+  color: var(--ink);
+}
+.contact-card__label {
+  display: block;
+  font-weight: 800;
+  font-size: 0.95rem;
+}
+.contact-card__value {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.4rem;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+.contact-card__value--small {
+  font-size: 1.1rem;
+}
+.contact-card .small {
+  display: block;
+  margin-top: 4px;
+}
+.hours {
+  display: grid;
+  gap: 2px;
+  margin-top: 4px;
+}
+.hours__row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+}
+.contact__map-art {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 400 / 260;
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-lg);
+  margin-bottom: 12px;
+}
