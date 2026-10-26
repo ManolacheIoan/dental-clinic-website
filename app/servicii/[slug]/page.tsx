@@ -15,13 +15,13 @@ export function generateStaticParams() {
   return services.map((s) => ({ slug: s.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/servicii/[slug]">): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const s = getService(slug);
   return s ? { title: s.name, description: s.short } : {};
 }
 
-export default async function ServicePage({ params }: PageProps<"/servicii/[slug]">) {
+export default async function ServicePage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const s = getService(slug);
   if (!s) notFound();

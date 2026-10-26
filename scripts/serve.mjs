@@ -2,7 +2,10 @@
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
-import { brotliCompressSync, gzipSync } from "node:zlib";
+import { brotliCompressSync, constants, gzipSync } from "node:zlib";
+
+/** Fișierele deja comprimate, ținute în memorie. */
+const cache = new Map();
 
 const root = join(process.cwd(), "out");
 const port = Number(process.env.PORT ?? 4173);
@@ -48,12 +51,19 @@ createServer(async (req, res) => {
   // Comprimare, ca la o găzduire reală (Netlify, Vercel etc.).
   if (/text|javascript|svg|json/.test(type)) {
     const accept = String(req.headers["accept-encoding"] ?? "");
-    if (accept.includes("br")) {
-      body = brotliCompressSync(body);
-      headers["content-encoding"] = "br";
-    } else if (accept.includes("gzip")) {
-      body = gzipSync(body);
-      headers["content-encoding"] = "gzip";
+    const enc = accept.includes("br") ? "br" : accept.includes("gzip") ? "gzip" : "";
+    if (enc) {
+      const key = `${enc}:${file}`;
+      if (!cache.has(key)) {
+        cache.set(
+          key,
+          enc === "br"
+            ? brotliCompressSync(body, { params: { [constants.BROTLI_PARAM_QUALITY]: 6 } })
+            : gzipSync(body),
+        );
+      }
+      body = cache.get(key);
+      headers["content-encoding"] = enc;
     }
   }
   if (file.includes("/_next/static/")) headers["cache-control"] = "public, max-age=31536000, immutable";

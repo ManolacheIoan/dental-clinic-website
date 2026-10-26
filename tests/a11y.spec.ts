@@ -16,8 +16,14 @@ for (const path of [...pages, "/pagina-inexistenta/"]) {
 
 test("axe: meniul deschis pe telefon și formularul cu erori", async ({ page, isMobile }) => {
   await page.goto("/programare/");
-  if (isMobile) await page.getByRole("button", { name: "Meniu" }).click();
+  if (isMobile) {
+    await page.getByRole("button", { name: "Meniu" }).click();
+    const withMenu = await new AxeBuilder({ page }).withTags(tags).analyze();
+    expect(withMenu.violations.map((v) => v.id)).toEqual([]);
+    await page.keyboard.press("Escape");
+  }
   await page.getByRole("button", { name: "Cere programarea" }).click();
+  await expect(page.getByText("Scrie-ne numele tău.")).toBeVisible();
   const results = await new AxeBuilder({ page }).withTags(tags).analyze();
   expect(results.violations.map((v) => v.id)).toEqual([]);
 });
