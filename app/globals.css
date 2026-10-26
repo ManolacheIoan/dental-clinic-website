@@ -1353,3 +1353,257 @@ main:focus {
   color: var(--ink-soft);
   font-size: 0.95rem;
 }
+
+/* ==========================================================================
+   Pentru copii
+   ========================================================================== */
+
+.kids-hero {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.kids-hero__tooth {
+  position: absolute;
+  left: 4%;
+  top: 14%;
+  width: 58%;
+  aspect-ratio: 100 / 110;
+}
+.kids-hero__brush {
+  position: absolute;
+  right: 6%;
+  top: 26%;
+  width: 30%;
+  aspect-ratio: 100 / 150;
+  --tilt: 8deg;
+  --delay: -1.5s;
+}
+.kids-hero__spark {
+  position: absolute;
+  right: 18%;
+  top: 2%;
+  width: 16%;
+  aspect-ratio: 1;
+}
+
+.first-visit__art {
+  display: block;
+  width: 150px;
+  height: 188px;
+  margin-top: 8px;
+}
+
+.demo {
+  display: grid;
+  gap: 24px;
+  align-items: center;
+  max-width: 960px;
+  margin-inline: auto;
+  padding: 20px;
+  background: var(--white);
+  border: var(--border);
+  border-radius: 32px;
+  box-shadow: var(--shadow-lg);
+}
+@media (min-width: 820px) {
+  .demo {
+    grid-template-columns: 1.2fr 1fr;
+    padding: 32px;
+  }
+}
+.demo__stage {
+  background: var(--teal-soft);
+  border-radius: 24px;
+  padding: 12px;
+}
+.demo__svg {
+  display: block;
+  width: 100%;
+  aspect-ratio: 250 / 190;
+  height: auto;
+}
+.demo__brush {
+  transition: transform 0.7s var(--ease-bounce);
+}
+.demo__germ {
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+.demo__germ--gone {
+  opacity: 0;
+}
+@keyframes scrub {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-7px, -3px);
+  }
+  50% {
+    transform: translate(0, -5px);
+  }
+  75% {
+    transform: translate(7px, -2px);
+  }
+}
+@keyframes foam {
+  0%,
+  100% {
+    transform: translateY(0) scale(0.9);
+  }
+  50% {
+    transform: translateY(-4px) scale(1.1);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .demo--playing .demo__scrub {
+    animation: scrub 0.45s linear infinite;
+  }
+  .demo__foam {
+    animation: foam 0.6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+  .demo__shine {
+    animation: twinkle 1.6s ease-in-out infinite;
+    transform-box: fill-box;
+    transform-origin: center;
+  }
+}
+.demo__steps {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.demo__steps li {
+  padding: 6px 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  background: var(--cream);
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.demo__steps li.is-current {
+  background: var(--sun);
+}
+.demo__steps li.is-done {
+  background: var(--teal-mist);
+}
+.demo__steps li.is-done::before {
+  content: "✓ ";
+}
+.demo__status {
+  min-height: 5.2em;
+  font-size: 1.08rem;
+}
+
+.tip-card {
+  position: relative;
+  height: 100%;
+  padding: 24px 22px 8px;
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+}
+.tip-card p {
+  color: var(--ink-soft);
+}
+.tip-card h3 {
+  font-size: 1.2rem;
+  padding-right: 36px;
+}
+.tip-card__num {
+  position: absolute;
+  top: -14px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background: var(--coral);
+  font-family: var(--font-display);
+  font-weight: 700;
+  transform: rotate(8deg);
+}
+
+.checklist {
+  padding: 24px;
+  background: var(--white);
+  border: var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.checklist fieldset {
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+.checklist__legend {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.3rem;
+  margin-bottom: 12px;
+}
+.checklist__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 8px;
+}
+.checklist__list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.checklist__list input {
+  flex: none;
+  width: 26px;
+  height: 26px;
+  margin: 2px 0 0;
+  accent-color: var(--teal-btn);
+  cursor: pointer;
+}
+.checklist__list label {
+  cursor: pointer;
+  padding-top: 1px;
+}
+.checklist__progress {
+  margin-top: 18px;
+}
+.checklist__progress p {
+  margin: 8px 0 0;
+  font-weight: 800;
+}
+.checklist__bar {
+  height: 14px;
+  border: 2px solid var(--ink);
+  border-radius: 999px;
+  overflow: hidden;
+  background: var(--cream);
+}
+.checklist__bar span {
+  display: block;
+  height: 100%;
+  background: var(--sun);
+  transform-origin: left;
+  transition: transform 0.4s var(--ease-bounce);
+}
+.checklist__done {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 16px;
+}
+.checklist__mascot {
+  width: 72px;
+  height: 80px;
+}
