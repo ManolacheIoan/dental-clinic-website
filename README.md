@@ -1,135 +1,117 @@
-# Zâmbet Mare — site de prezentare pentru o clinică stomatologică
+# Dental Clinic Website — "Zâmbet Mare"
 
-> **Proiect demonstrativ (portofoliu).** Clinica „Zâmbet Mare”, medicii, prețurile, telefonul,
-> adresa de email și programul sunt **fictive**. Site-ul arată ca unul final, dar nu aparține
-> unei clinici reale. Paginile au `noindex`, ca să nu apară în motoarele de căutare.
-> Textul politicii de confidențialitate este un model generic și trebuie verificat de un jurist
-> înainte de folosirea reală.
+A complete multi-page website for a family dental clinic in Galați, Romania, built for patients
+of all ages and especially for children. I built it from scratch, from the visual identity to the
+code and automated tests, with three goals: **patients can book a visit in as few steps as
+possible**, **the site is accessible to everyone**, and **no personal data is collected without
+a reason**.
 
-Site static (Next.js 16, export static), în limba română, gândit întâi pentru telefon. Identitate
-proprie: turcoaz, galben-soare și coral pe crem, logo original și trei mascote desenate în SVG
-(Dințișor, Periuța și Doctorița Zâmbet). Nu folosește imagini de pe internet, scripturi de la
-terți sau cookie-uri.
+The site content is in Romanian, for a local audience.
 
-## Pagini
+**Tech stack:** Next.js 16 (App Router, static export) · React 19 · TypeScript · modern CSS ·
+Playwright · axe-core · ESLint
 
-| Adresă | Conținut |
+---
+
+## What I built
+
+- **9 pages plus 7 service pages**, all generated from the same data: home, services, for kids,
+  team, prices, FAQ, booking, contact, privacy policy and a custom 404 page.
+- **Original visual identity:** a teal, sunny yellow and coral palette on cream, a logo and three
+  mascots drawn entirely in SVG, an illustration for each service, team avatars generated from
+  parameters, and a stylised map.
+- **Booking form** with per-field validation, Romanian phone number format, and the service
+  pre-selected when the patient comes from a service page.
+- **Section for children:** the first visit explained step by step, an animated tooth-brushing
+  demo and an interactive preparation checklist.
+- **Searchable FAQ**, a price table per service, and a sticky "Call now" bar on mobile.
+
+## Decisions and why
+
+| Decision | Why |
 | --- | --- |
-| `/` | Acasă: hero animat, servicii, de ce noi, copii, echipa |
-| `/servicii/` și `/servicii/<slug>/` | Ansamblu + câte o pagină pentru fiecare dintre cele 7 servicii |
-| `/pentru-copii/` | Prima vizită pas cu pas, demonstrație animată de periaj, sfaturi, listă de bifat |
-| `/echipa/` | Medici fictivi cu avatare ilustrate |
-| `/preturi/` | Tabel de prețuri orientative, pe servicii |
-| `/intrebari-frecvente/` | Întrebări cu căutare și stare „nimic găsit” |
-| `/programare/` | Formular cu validare (vezi mai jos) |
-| `/contact/` | Telefon click-to-call, email, program, hartă ilustrată (fără hărți externe) |
-| `/confidentialitate/` | Politica de confidențialitate și cookie-uri (model generic) |
-| orice altă adresă | Pagina 404 jucăușă |
+| **Mobile-first** | Most patients look for a dentist on their phone. The "Call now" bar and click-to-call numbers shorten the path to a booking. |
+| **Static export, no server** | Fast loading, near-zero hosting cost, minimal attack surface. The site runs on any static host. |
+| **Zero external requests** | Self-hosted fonts, no Google Maps, no analytics, no cookies. No consent banner is needed and visitors are not tracked. An automated test checks this on every page. |
+| **Original SVG illustrations** | A warm, consistent, child-friendly look, no stock photo licensing issues, and very small file sizes. |
+| **Content separated from code** | Services, prices, team and FAQ live in data files (`data/`), and the clinic name and contact details in a single config (`config/site.ts`). Pages and the price table are generated from them. |
+| **Booking without a required backend** | By default the form sends no data and offers a pre-filled email and a call button instead. To send real bookings, an endpoint (e.g. Formspree) is set through an environment variable, with no code changes. |
+| **WCAG 2.2 AA accessibility** | A clinic serves patients of all ages, including keyboard and screen reader users. Colour contrast is tuned for text on light backgrounds. |
 
-## Structura proiectului
+## Quality
+
+**Accessibility**
+- "Skip to content" link, fully keyboard-operable menu (Escape closes it), visible focus.
+- Form errors are announced to screen readers and focus moves to the first invalid field.
+- All animations stop when the system requests reduced motion (`prefers-reduced-motion`);
+  the brushing demo only starts on demand and has a pause button.
+- Content stays visible without JavaScript.
+
+**Automated testing** (Playwright, on a mobile and a desktop profile)
+- axe audit (WCAG 2.2 AA) on every page, including the 404 page.
+- Booking form: errors, focus handling, success state and service pre-selection.
+- No page makes requests to external domains.
+- Keyboard navigation, mobile menu, "Call now" bar, reduced motion and the brushing demo.
+
+**Performance**
+- Static HTML, self-hosted fonts subset for Romanian diacritics (ă, â, î, ș, ț),
+  vector illustrations instead of raster images.
+- Page transitions with the View Transitions API.
+
+## Project structure
 
 ```
-app/                 paginile (App Router), globals.css, fonturi locale în app/fonts
-components/          antet, subsol, bara „Sună acum”, carduri, formular, demonstrație periaj
+app/                 pages (App Router), global styles, self-hosted fonts
+components/          header, footer, booking form, cards, "Call now" bar, brushing demo
 components/illustrations/
-  Mascots.tsx        Dințișor, Periuța, Doctorița Zâmbet, steluțe, bule
-  ServiceArt.tsx     ilustrația fiecărui serviciu
-  Avatar.tsx         avatarele echipei (generate din parametri)
-  MapArt.tsx         harta stilizată de la Contact
-config/site.ts       NUMELE clinicii, telefon, email, zonă, program, meniu
-data/services.ts     serviciile: texte, pași, sfaturi, prețuri
-data/team.ts         echipa: nume, rol, descriere, aspectul avatarului
-data/faq.ts          întrebări frecvente
-lib/booking.ts       validarea formularului de programare
-tests/               teste Playwright + axe
-scripts/serve.mjs    server local pentru folderul out/ (teste și Lighthouse)
+  Mascots.tsx        mascots and decorative elements
+  ServiceArt.tsx     illustration for each service
+  Avatar.tsx         team avatars generated from parameters
+  MapArt.tsx         stylised map on the Contact page
+config/site.ts       clinic name, phone, email, area, opening hours, menu
+data/                services and prices, team, FAQ
+lib/booking.ts       booking form validation logic
+tests/               Playwright + axe tests
+scripts/serve.mjs    local server with compression for the static build
 ```
 
-## Editarea conținutului
-
-- **Telefon, email, zonă, program:** `config/site.ts`.
-- **Servicii și prețuri:** `data/services.ts`. Fiecare serviciu are `prices`; pagina
-  `/preturi/` și secțiunea de prețuri a serviciului se actualizează singure. Un serviciu nou
-  are nevoie și de o ilustrație: adaugă cheia în `ServiceArtKey` și desenul în `ServiceArt.tsx`.
-- **Echipa:** `data/team.ts`. Aspectul avatarului se alege din `look` (piele, păr, coafură,
-  culoarea halatului, ochelari, barbă).
-- **Întrebări frecvente:** `data/faq.ts`.
-- **Culori:** variabilele de la începutul `app/globals.css`. Pentru text pe fundal deschis
-  se folosesc nuanțele închise (`--teal-ink`, `--coral-ink`), care respectă contrastul WCAG AA.
-
-## Redenumirea clinicii
-
-Numele apare dintr-o singură constantă:
-
-```ts
-// config/site.ts
-export const CLINIC_NAME = "Zâmbet Mare";
-```
-
-Schimbă textul, apoi refă build-ul. Titlurile paginilor, logo-ul, subsolul și textele se
-actualizează automat. Dacă schimbi și adresa de email, modific-o tot în `config/site.ts`.
-
-## Formularul de programare
-
-Câmpuri: nume, telefon (format românesc), serviciu, ziua preferată, mesaj opțional și acord.
-Validarea se face în browser, cu mesaje lângă fiecare câmp, iar focusul trece pe primul câmp greșit.
-
-- **Implicit nu trimite date nicăieri.** După completare, spune clar că cererea nu a fost
-  trimisă și oferă un email gata completat (`mailto:`) și butonul de apel.
-- **Pentru trimitere reală** (de ex. [Formspree](https://formspree.io)), setează la build
-  variabila de mediu `NEXT_PUBLIC_BOOKING_ENDPOINT` cu adresa formularului
-  (de ex. `https://formspree.io/f/abcdwxyz`), din setările găzduirii sau din terminal:
-
-  ```bash
-  NEXT_PUBLIC_BOOKING_ENDPOINT=https://formspree.io/f/abcdwxyz npm run build
-  ```
-
-  Formularul trimite atunci JSON prin `POST`. Dacă trimiterea eșuează, arată un mesaj de eroare
-  cu aceleași variante de rezervă (email și telefon).
-
-## Comenzi
+## Running locally
 
 ```bash
 npm install
-npm run dev          # dezvoltare: http://localhost:3000
-npm run clean        # șterge .next și out
-npm run build        # export static în out/
-npm run serve        # servește out/ pe http://localhost:4173 (cu compresie)
+npm run dev          # development: http://localhost:3000
+npm run build        # static export to out/
+npm run serve        # serves out/ at http://localhost:4173
 npm run lint
 npm run typecheck
-npm test             # Playwright + axe (pe out/, deci rulează întâi build)
+npm test             # Playwright + axe (run after build)
 ```
 
-Testele verifică: accesibilitatea (axe, WCAG 2.2 AA) pe toate paginile și pe 404, formularul de
-programare (erori, focus, succes fără trimitere de date, precompletarea serviciului), faptul că
-**nicio pagină nu face cereri externe**, `noindex`, navigarea cu tastatura, bara „Sună acum”,
-mișcarea redusă și demonstrația de periaj. Rulează pe un profil de telefon și pe unul de desktop.
+## Configuration
 
-Lighthouse (pe build-ul servit local):
+- **Name and contact details:** `config/site.ts`. The clinic name comes from a single constant
+  (`CLINIC_NAME`) used in titles, logo, footer and copy.
+- **Services and prices:** `data/services.ts`. The `/preturi/` page and each service's price
+  section update automatically.
+- **Team:** `data/team.ts`, including avatar appearance (hair, skin, coat, glasses, etc.).
+- **FAQ:** `data/faq.ts`.
+- **Colours:** CSS variables at the top of `app/globals.css`.
+- **Sending bookings:** set `NEXT_PUBLIC_BOOKING_ENDPOINT` at build time:
 
-```bash
-npm run serve &
-npx lighthouse http://localhost:4173/ --view
-```
+  ```bash
+  NEXT_PUBLIC_BOOKING_ENDPOINT=https://formspree.io/f/<id> npm run build
+  ```
 
-Scorul SEO e mai mic intenționat, din cauza `noindex`.
+## Deployment
 
-## Animații și accesibilitate
+The `out/` folder can be deployed to any static host (Netlify, Vercel, Cloudflare Pages,
+GitHub Pages). The 404 page is served from `out/404.html`.
 
-- Personaje care plutesc, steluțe care sclipesc, apariții la derulare, „wiggle” pe cardurile
-  de servicii, demonstrație de periaj și tranziții între pagini (View Transitions, prin React).
-- Toate animațiile sunt dezactivate când sistemul cere **mișcare redusă**
-  (`prefers-reduced-motion`). Demonstrația de periaj pornește doar la cerere și are buton de pauză.
-- Conținutul ascuns pentru animația de apariție rămâne vizibil fără JavaScript.
-- Link „Sari la conținut”, meniu accesibil cu tastatura (Escape îl închide), focus vizibil,
-  mesaje anunțate cititoarelor de ecran.
+## Fonts
 
-## Fonturi
+Fredoka (headings) and Nunito Sans (body), self-hosted, SIL Open Font License.
 
-Fredoka (titluri) și Nunito Sans (text), găzduite local în `app/fonts`, licență SIL Open Font
-License (fișierele `OFL-*.txt`). Includ diacriticele românești (ă, â, î, ș, ț).
+---
 
-## Publicare
-
-Folderul `out/` poate fi pus pe orice găzduire statică (Netlify, Vercel, Cloudflare Pages,
-GitHub Pages). Pentru pagina 404, găzduirea trebuie să servească `out/404.html`.
+*Portfolio project. Contact details are placeholder data, and pages use `noindex` until the site
+is published for a client.*
