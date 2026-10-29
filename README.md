@@ -8,8 +8,10 @@ a reason**.
 
 The site content is in Romanian, for a local audience.
 
+**Live preview:** https://manolacheioan.github.io/dental-clinic-website/
+
 **Tech stack:** Next.js 16 (App Router, static export) · React 19 · TypeScript · modern CSS ·
-Playwright · axe-core · ESLint
+Playwright · axe-core · ESLint · GitHub Actions
 
 ---
 
@@ -47,7 +49,7 @@ Playwright · axe-core · ESLint
   the brushing demo only starts on demand and has a pause button.
 - Content stays visible without JavaScript.
 
-**Automated testing** (Playwright, on a mobile and a desktop profile)
+**Automated testing** (Playwright, on a mobile and a desktop profile, run in GitHub Actions on every push)
 - axe audit (WCAG 2.2 AA) on every page, including the 404 page.
 - Booking form: errors, focus handling, success state and service pre-selection.
 - No page makes requests to external domains.
@@ -104,8 +106,18 @@ npm test             # Playwright + axe (run after build)
 
 ## Deployment
 
-The `out/` folder can be deployed to any static host (Netlify, Vercel, Cloudflare Pages,
-GitHub Pages). The 404 page is served from `out/404.html`.
+Every push to `main` runs the GitHub Actions workflow in `.github/workflows/pages.yml`: lint,
+type check, build, the full Playwright + axe test suite, and then a build published to
+GitHub Pages. The site is only published if every check passes.
+
+GitHub Pages serves the site from a sub-path, so that build sets `BASE_PATH`:
+
+```bash
+BASE_PATH=/dental-clinic-website npm run build
+```
+
+Without `BASE_PATH`, the `out/` folder works from a domain root on any static host
+(Netlify, Vercel, Cloudflare Pages). The 404 page is served from `out/404.html`.
 
 ## Fonts
 

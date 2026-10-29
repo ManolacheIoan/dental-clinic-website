@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   title: { default: `${CLINIC_NAME} — ${site.tagline}`, template: `%s | ${CLINIC_NAME}` },
   description: `${CLINIC_NAME}: stomatologie prietenoasă pentru copii și adulți în ${site.city}. Consultații, igienizare, ortodonție, pedodonție, albire și implanturi.`,
   robots: { index: false, follow: false, nocache: true, googleBot: { index: false, follow: false } },
-  icons: { icon: "/icon.svg" },
+  icons: { icon: `${process.env.NEXT_PUBLIC_BASE_PATH ?? ""}/icon.svg` },
 };
 
 export const viewport: Viewport = {
