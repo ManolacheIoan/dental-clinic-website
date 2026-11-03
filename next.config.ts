@@ -14,6 +14,7 @@ const nextConfig: NextConfig = {
   trailingSlash: true,
   images: { unoptimized: true },
   poweredByHeader: false,
+  agentRules: false,
   turbopack: { root: __dirname },
   ...(basePath ? { basePath } : {}),
   env: { NEXT_PUBLIC_BASE_PATH: basePath },
