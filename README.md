@@ -121,7 +121,8 @@ Without `BASE_PATH`, the `out/` folder works from a domain root on any static ho
 
 ## Fonts
 
-Fredoka (headings) and Nunito Sans (body), self-hosted, SIL Open Font License.
+Baloo 2 (headings) and Nunito Sans (body), self-hosted, SIL Open Font License. Both cover the full
+Romanian alphabet, including ă, ș and ț with comma below.
 
 ---
 

@@ -73,7 +73,7 @@ h2,
 h3,
 h4 {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   line-height: 1.15;
   margin: 0 0 0.5em;
   letter-spacing: -0.01em;
@@ -180,7 +180,7 @@ main:focus {
   color: var(--white);
   font-family: var(--font-display);
   font-size: 1.08rem;
-  font-weight: 600;
+  font-weight: 700;
   text-decoration: none;
   box-shadow: 3px 4px 0 var(--ink);
   cursor: pointer;
@@ -235,7 +235,7 @@ main:focus {
   align-items: center;
   gap: 10px;
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.45rem;
   color: var(--ink);
   line-height: 1;
@@ -306,7 +306,7 @@ main:focus {
   padding: 12px 8px;
   color: var(--ink);
   font-family: var(--font-display);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 1.2rem;
   text-decoration: none;
   border-radius: 12px;
@@ -378,7 +378,7 @@ main:focus {
   min-height: 48px;
   border-radius: 999px;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.1rem;
   text-decoration: none;
 }
@@ -940,7 +940,7 @@ main:focus {
   border-radius: 50%;
   background: var(--sun);
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   font-size: 1.2rem;
 }
 .steps__title {
@@ -986,7 +986,7 @@ main:focus {
 .price-table thead th {
   background: var(--teal-soft);
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   border-bottom: 2px solid var(--ink);
 }
 .price-table tbody th {
@@ -1120,7 +1120,7 @@ main:focus {
 }
 .hero__accent {
   color: var(--teal-ink);
-  background: linear-gradient(transparent 62%, var(--sun) 62%, var(--sun) 92%, transparent 92%);
+  background: linear-gradient(transparent 55%, var(--sun) 55%, var(--sun) 84%, transparent 84%);
   padding: 0 4px;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
@@ -1365,7 +1365,7 @@ main:focus {
 }
 .team-teaser__name {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.12rem;
 }
 .team-teaser__role {
@@ -1549,7 +1549,7 @@ main:focus {
   border-radius: 50%;
   background: var(--coral);
   font-family: var(--font-display);
-  font-weight: 700;
+  font-weight: 800;
   transform: rotate(8deg);
 }
 
@@ -1567,7 +1567,7 @@ main:focus {
 }
 .checklist__legend {
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.3rem;
   margin-bottom: 12px;
 }
@@ -1707,7 +1707,7 @@ main:focus {
   position: relative;
   padding: 16px 56px 16px 20px;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.15rem;
   cursor: pointer;
   list-style: none;
@@ -2028,7 +2028,7 @@ a.contact-card:hover {
 .contact-card__value {
   display: block;
   font-family: var(--font-display);
-  font-weight: 600;
+  font-weight: 700;
   font-size: 1.4rem;
   line-height: 1.25;
   overflow-wrap: anywhere;

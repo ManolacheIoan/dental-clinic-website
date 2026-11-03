@@ -7,17 +7,20 @@ import { MobileCallBar } from "@/components/MobileCallBar";
 import { CLINIC_NAME, site } from "@/config/site";
 import "./globals.css";
 
-// Fonturi găzduite local: Fredoka (titluri rotunjite) și Nunito Sans (text).
-// Fiecare are fișier „latin” + „latin-ext” (pentru ă, ș, ț).
+// Fonturi găzduite local: Baloo 2 (titluri rotunjite) și Nunito Sans (text). Ambele au ă, â, î, ș, ț.
+// Fiecare are fișier „latin” + „latin-ext” (pentru ă, ș, ț). Fișierul „latin” nu are font de rezervă,
+// altfel browserul ar lua diacriticele din Arial în loc să treacă la fișierul „latin-ext”.
 const display = localFont({
-  src: "./fonts/fredoka-latin-wght-normal.woff2",
-  weight: "300 700",
+  src: "./fonts/baloo-2-latin-wght-normal.woff2",
+  weight: "400 800",
   variable: "--font-display-latin",
   display: "swap",
+  fallback: [],
+  adjustFontFallback: false,
 });
 const displayExt = localFont({
-  src: "./fonts/fredoka-latin-ext-wght-normal.woff2",
-  weight: "300 700",
+  src: "./fonts/baloo-2-latin-ext-wght-normal.woff2",
+  weight: "400 800",
   variable: "--font-display-ext",
   display: "swap",
 });
@@ -26,6 +29,8 @@ const text = localFont({
   weight: "200 1000",
   variable: "--font-text-latin",
   display: "swap",
+  fallback: [],
+  adjustFontFallback: false,
 });
 const textExt = localFont({
   src: "./fonts/nunito-sans-latin-ext-wght-normal.woff2",
