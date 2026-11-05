@@ -15,6 +15,8 @@ Playwright · axe-core · ESLint · GitHub Actions
 
 ---
 
+![Zâmbet Mare home page: hero with the booking button and illustrated mascots](docs/screenshot.webp)
+
 ## What I built
 
 - **9 pages plus 7 service pages**, all generated from the same data: home, services, for kids,
