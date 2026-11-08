@@ -1,5 +1,7 @@
 # Dental Clinic Website — "Zâmbet Mare"
 
+[![Tests and deploy](https://github.com/ManolacheIoan/dental-clinic-website/actions/workflows/pages.yml/badge.svg?branch=main)](https://github.com/ManolacheIoan/dental-clinic-website/actions/workflows/pages.yml)
+
 A complete multi-page website for a family dental clinic in Galați, Romania, built for patients
 of all ages and especially for children. I built it from scratch, from the visual identity to the
 code and automated tests, with three goals: **patients can book a visit in as few steps as
