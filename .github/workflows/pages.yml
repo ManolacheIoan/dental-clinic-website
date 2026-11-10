@@ -1,9 +1,11 @@
 name: Pages
 
-# Checks every push to main (lint, types, Playwright + axe tests), then publishes the site to GitHub Pages.
+# Checks every push to main and every pull request (lint, types, Playwright + axe tests).
+# Only pushes to main publish the site to GitHub Pages.
 on:
   push:
     branches: [main]
+  pull_request:
   workflow_dispatch:
 
 permissions:
@@ -12,7 +14,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
@@ -37,15 +39,18 @@ jobs:
           CI: "true"
 
       - name: Build for /dental-clinic-website/
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         run: npm run clean && npm run build
         env:
           BASE_PATH: /dental-clinic-website
       - uses: actions/upload-pages-artifact@v5
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         with:
           path: out
 
   deploy:
     needs: build
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
